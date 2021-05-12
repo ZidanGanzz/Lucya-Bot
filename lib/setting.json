@@ -1,0 +1,12 @@
+{
+  "limitCount": "5000",
+  "medialimitCount": "500",
+  "memberLimit": 10,
+  "groupLimit": "100",
+  "prefix": "!",
+  "mtc": true,
+  "restartState": false,
+  "restartId": "undefined",
+  "banChats": false,
+  "Rest": true
+}
