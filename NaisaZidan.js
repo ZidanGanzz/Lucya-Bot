@@ -322,7 +322,7 @@ module.exports = msgHndlr = async (aksa, message) => {
         const isImage = type === 'image'
         const StickerMetadata = { author : '@_zidanfadilaharsa', pack: 'Raisa Bot', keepScale: true }
         const isAdmin = adminNumber.includes(sender.id)
-        const ownerNumber = ["6281310253704@c.us", "17073546544@c.us"] // replace with your whatsapp number
+        const ownerNumber = ["6281310253704@c.us"] // replace with your whatsapp number
         const isOwner = ownerNumber.includes(sender.id)
         const isBanned = banned.includes(sender.id)
         const isBlocked = blockNumber.includes(sender.id)
@@ -609,12 +609,15 @@ module.exports = msgHndlr = async (aksa, message) => {
 		if (args.includes('ngab')) { //Edit ae ngab
             aksa.reply(from, '🆖🆎', id)
         }
-		if (args.includes('zidan')){
-			//const bug = body.slice(5)
-             aksa.reply(from, 'HAYO LAGI NGOMONGIN OWNER YAA!! RAISA CEPUIN AH:D', id)
-             aksa.sendText(ownerNumber, `*Hallo owner ada yang ngomongin owner nih*\n*WAKTU* : ${time}\nNO PENGIRIM : wa.me/${sender.id.match(/\d+/g)}\nGroup : ${formattedTitle} isi pesannya : ${body.slice(6)}`, id)
-            }
-			
+		if (args.includes('zidan')) {
+            const zid = body.slice(6)
+                   // if(isGroupMsg){
+                     //   aksa.sendText(ownerNumber, `*Hallo owner ada yang ngomongin owner nih\n*WAKTU* : ${time}\nNO PENGIRIM : wa.me/${sender.id.match(/\d+/g)}\nGroup : ${formattedTitle}\n\n${zid}`)
+                      //  aksa.reply(from, 'HAYOO LAGI NGOMONGIN OWNER YAH. LUCYA CEPUIN AH :D' ,id)
+                    //}else{
+                        aksa.sendText(ownerNumber, `*Hallo owner ada yang ngomongin owner nih*\n*WAKTU* : ${time}\nNO PENGIRIM : wa.me/${sender.id.match(/\d+/g)}\n\n${zid}`)
+                        aksa.reply(from, 'HAYOO LAGI NGOMONGIN OWNER YAH. LUCYA CEPUIN AH :D', id)
+        }
         if (body === `${prefix}public`) {
             if (!isOwner) return aksa.reply(dari, 'Maaf, perintah ini hanya dapat dilakukan oleh Owner Lucya!', id)
             if (setting.banChats === false) return
@@ -626,18 +629,18 @@ module.exports = msgHndlr = async (aksa, message) => {
         }
 
         // [BETA] Avoid Spam Message
-        if (isCmd && msgFilter.isFiltered(from) && !isGroupMsg) {
-            return console.log(color('[SPAM]', 'red'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname))
-        }
-        if (isCmd && msgFilter.isFiltered(from) && isGroupMsg) {
-            return console.log(color('[SPAM]', 'red'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname), 'in', color(name || formattedTitle))
-        }
+       // if (isCmd && msgFilter.isFiltered(from) && !isGroupMsg) {
+         //   return console.log(color('[SPAM AJJG]', 'red'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'DARI', color(pushname))
+      //  }
+       // if (isCmd && msgFilter.isFiltered(from) && isGroupMsg) {
+       //     return console.log(color('[SPAM AJJG]', 'red'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'DARI', color(pushname), 'DI GRUB', color(name || formattedTitle))
+      // }
         //
         if (isCmd && !isGroupMsg) {
-            console.log(color('[EXEC]'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname))
+            console.log(color('[DITERIMA]'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'DARI', color(pushname))
         }
         if (isCmd && isGroupMsg) {
-            console.log(color('[EXEC]'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(pushname), 'in', color(name || formattedTitle))
+            console.log(color('[DITERIMA]'), color(moment(t * 1000).format('DD/MM/YY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'DARI', color(pushname), 'DI GRUB', color(name || formattedTitle))
         }
         // [BETA] Avoid Spam Message
         msgFilter.addFilter(from)
@@ -1291,8 +1294,14 @@ https://instagram.com/_zidanfadilaharsa
                     aksa.reply(dari, readme(), id)
                     break
                 case `${prefix}info`:
-                    if (!isRegis) return aksa.reply(dari, `Maaf ${pushname}, sepertinya kamu belum terdaftar sebagai user Lucya, untuk pendaftaran bisa menggunakan *!regis* |nama|no hp. Contoh: !regis |${pushname}|${serial.replace(/@c.us/g,'')}`, id)
-                    aksa.sendLinkWithAutoPreview(dari, 'https://instagram.com/bdrsmsdn', info(), id)
+				case `#info`:
+				case `.info`:
+				case `$info`:
+				case `xinfo`:
+                   // if (!isRegis) return aksa.reply(dari, `Maaf ${pushname}, sepertinya kamu belum terdaftar sebagai user Lucya, untuk pendaftaran bisa menggunakan *!regis* |nama|no hp. Contoh: !regis |${pushname}|${serial.replace(/@c.us/g,'')}`, id)
+                    //aksa.sendLinkWithAutoPreview(from, 'https://instagram.com/_zidanfadilaharsa', id)
+				    aksa.sendTextWithMentions(from, 'Creator @6281310253704@c.us', id)
+				    aksa.sendText(from, info(), id)
                     break
                 case `${prefix}snk`:
                     if (!isRegis) return aksa.reply(dari, `Maaf ${pushname}, sepertinya kamu belum terdaftar sebagai user Lucya, untuk pendaftaran bisa menggunakan *!regis* |nama|no hp. Contoh: !regis |${pushname}|${serial.replace(/@c.us/g,'')}`, id)

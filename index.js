@@ -53,7 +53,7 @@ const start = async(aksa = new Client()) => {
         aksa.onAnyMessage((fn) => messageLog(fn.fromMe, fn.type))
         // Force it to keep the current session
     aksa.onStateChanged((state) => {
-            console.log('[Client State]', state)
+            console.log('[ZidanF.A State]', state)
             if (state === 'CONFLICT' || state === 'UNLAUNCHED') aksa.forceRefocus()
         })
         // listening on message
