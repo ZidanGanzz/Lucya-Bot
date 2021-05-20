@@ -1113,7 +1113,9 @@ Total user terdaftar : ${regis.length}
                     for (let lmt of limidatt) {
                         if (lmt.id === serial) {
                             let limitCounts = limitCount - lmt.limit
-                            aksa.reply(dari, `
+                             var pic = await aksa.getProfilePicFromServer(author)
+            aksa.sendFileFromUrl(from, './media/bot.png', '' `
+							
 ╭─────「 *INFO* 」──── 
 │++ _*LUCYA V2*_ 
 │+ 3.1.X 
@@ -1171,7 +1173,8 @@ https://instagram.com/_zidanfadilaharsa
                         };
                         limit.push(obj);
                         fs.writeFileSync('./lib/limit.json', JSON.stringify(limit, 1));
-                        aksa.reply(dari, `
+                        var pic = await aksa.getProfilePicFromServer(author)
+            aksa.sendFileFromUrl(from, './media/bot.png', '' `
 ╭─────「 *INFO* 」──── 
 │++ _*LUCYA V2*_ 
 │+ 3.1.X 
@@ -1231,27 +1234,32 @@ https://instagram.com/_zidanfadilaharsa
                 case `${prefix}vip`:
                     if (!isRegis) return aksa.reply(dari, `Maaf ${pushname}, sepertinya kamu belum terdaftar sebagai user Lucya, untuk pendaftaran bisa menggunakan *!regis* |nama|no hp. Contoh: !regis |${pushname}|${serial.replace(/@c.us/g,'')}`, id)
                     if (!isAdmin) return aksa.reply(dari, 'Mohon maaf anda tidak bisa menggunakan fitur premium!', id)
-                    aksa.sendText(dari, prem(), id)
+                    var pic = await aksa.getProfilePicFromServer(author)
+                    aksa.sendFileFromUrl(from, pic, 'ZidanGanzz.jpg',  prem(), id)
                     break
                 case `${prefix}maker`:
                     if (!isRegis) return aksa.reply(dari, `Maaf ${pushname}, sepertinya kamu belum terdaftar sebagai user Lucya, untuk pendaftaran bisa menggunakan *!regis* |nama|no hp. Contoh: !regis |${pushname}|${serial.replace(/@c.us/g,'')}`, id)
-                    aksa.reply(dari, maker(), id)
+                    var pic = await aksa.getProfilePicFromServer(author)
+                    aksa.sendFileFromUrl(from, pic, 'ZidanGanzz.jpg', maker(), id)
                     break
                 case `${prefix}media`:
                     if (!isRegis) return aksa.reply(dari, `Maaf ${pushname}, sepertinya kamu belum terdaftar sebagai user Lucya, untuk pendaftaran bisa menggunakan *!regis* |nama|no hp. Contoh: !regis |${pushname}|${serial.replace(/@c.us/g,'')}`, id)
-                    aksa.reply(dari, media(), id)
+                    var pic = await aksa.getProfilePicFromServer(author)
+                    aksa.sendFileFromUrl(from, pic, 'ZidanGanzz.jpg', media(), id)
                     break
                 case `${prefix}edukasi`:
                     if (!isRegis) return aksa.reply(dari, `Maaf ${pushname}, sepertinya kamu belum terdaftar sebagai user Lucya, untuk pendaftaran bisa menggunakan *!regis* |nama|no hp. Contoh: !regis |${pushname}|${serial.replace(/@c.us/g,'')}`, id)
-                    aksa.reply(dari, edukasi(), id)
+                    var pic = await aksa.getProfilePicFromServer(author)
+                    aksa.sendFileFromUrl(from, pic, 'ZidanGanzz.jpg', edukasi(), id)
                     break
                 case `${prefix}funmenu`:
                     if (!isRegis) return aksa.reply(dari, `Maaf ${pushname}, sepertinya kamu belum terdaftar sebagai user Lucya, untuk pendaftaran bisa menggunakan *!regis* |nama|no hp. Contoh: !regis |${pushname}|${serial.replace(/@c.us/g,'')}`, id)
-                    aksa.reply(dari, funmenu(), id)
+                    var pic = await aksa.getProfilePicFromServer(author)
+                    aksa.sendFileFromUrl(from, pic, 'ZidanGanzz.jpg', funmenu(), id)
                     break
                 case `${prefix}iklan`:
                     if (!isRegis) return aksa.reply(dari, `Maaf ${pushname}, sepertinya kamu belum terdaftar sebagai user Lucya, untuk pendaftaran bisa menggunakan *!regis* |nama|no hp. Contoh: !regis |${pushname}|${serial.replace(/@c.us/g,'')}`, id)
-                    aksa.sendLinkWithAutoPreview(dari, 'https://instagram.com/kayora.id', sewa())
+                    aksa.sendLinkWithAutoPreview(dari, 'https://instagram.com/consigndigue', sewa(), id)
                     break
                 case `${prefix}poll`:
                     if (!isRegis) return aksa.reply(dari, `Maaf ${pushname}, sepertinya kamu belum terdaftar sebagai user Lucya, untuk pendaftaran bisa menggunakan *!regis* |nama|no hp. Contoh: !regis |${pushname}|${serial.replace(/@c.us/g,'')}`, id)
@@ -4074,40 +4082,26 @@ ${Object.keys(me.phone).map(key => `${key} : ${me.phone[key]}`).join('\n')}`.sli
                         aksa.reply(from, mess.error.Yt4, id)
                     }
                     break
-                case `${prefix}ytmp3`:
-                    if (!isGroupMsg) return aksa.reply(dari, `Perintah ini hanya bisa di gunakan dalam group!`, id)
-                    if (isLimit(serial)) return aksa.reply(dari, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik @limit Untuk Mengecek Kuota Limit Kamu`, id)
-                    if (args.length === 1) return aksa.reply(dari, `Kirim perintah *!ytmp3 [ Link Yt ]*, untuk contoh silahkan kirim perintah *@readme*`, id)
-                    if (args.length === 1) return aksa.reply(from, `Kirim perintah *#ytmp3 [ Link Yt ]*, untuk contoh silahkan kirim perintah *#readme*`, id)
-                   // let isLinks = args[1].match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
-                    //if (!isLinks) return zfa.reply(from, mess.error.Iv, id)
-                    try {
-                        aksa.reply(from, mess.wait, id)
-                        const vhtearyt3 = await fetch(`https://api.vhtear.com/ytdl?link=${args[1]}&apikey=ZidanGanzz`)
-                        if (!vhtearyt3.ok) throw new Error(`Error ytmp3 3 : ${vhtearyt3.statusText}`)
-                        const vhtearyt33 = await vhtearyt3.json()
-                        if (vhtearyt33.status == false) {
-                            aksa.reply(from, `*Maaf Terdapat kesalahan saat mengambil data, mohon pilih media lain...*`, id)
-                             } else {
-                            if (Number(vhtearyt33.result.size.split(' MB')[0]) >= 50.00) return aksa.reply(from, 'Maaf durasi audio sudah melebihi batas maksimal 10 MB!', id)							
-                            const {
-                                title,
-                                ext,
-                                size,
-                                UrlMp3,
-                                status,
-                                imgUrl
-                            } = await vhtearyt33.result
-                            const captions = `*「 YOUTUBE MP3 」*\n\n➸ *Judul* : ${title}\n➸ *Filesize* : ${size}\n\n_*Untuk durasi lebih dari batas disajikan dalam bentuk link*._\n${UrlMp3}`
-                            aksa.sendFileFromUrl(from, imgUrl, `thumb.jpg`, captions, id)
-                            await aksa.sendFileFromUrl(from, UrlMp3, `${title}.mp3`, '', id).catch(() => zfa.reply(from, mess.error.Yt4, id))
-                            await limitAdd(serial)
-                        }
-                    } catch (err) {
-                        aksa.sendText(ownerNumber, 'Error ytmp3 : ' + err)
-                        aksa.reply(from, mess.error.Yt3, id)
-                    }
-                    break
+			case `${prefix}ytmp32`:
+		//if (!isOwner) aksa.reply(from, 'Masih di test oleh owner', id)
+		const naycans = body.slice(8)
+		const zfagans = await axios.get(`http://lolhuman.herokuapp.com/api/ytaudio2?apikey=ZidanGanzz&url=${naycans}`, id)
+		const {
+				title,
+				thumbnail,
+				size,
+				link
+			} = await zfagans.data.result
+			const kepsenn = `「 YOUTUBE MP3 」\n\n➸ Judul : ${title}\n➸ Filesize : ${size}\n\n_Untuk durasi lebih dari batas disajikan dalam bentuk link._\n${link}`
+			aksa.sendFileFromUrl(from, thumbnail, `thumbnail.jpg`, kepsenn, id)
+            await aksa.sendFileFromUrl(from, link[1].link, `${title}.mp3`, '', id).catch(() => aksa.reply(from, mess.error.Yt4, id))
+			await limitAdd(serial)
+		    }
+		} catch (err) {
+			aksa.sendText(ownerNumber, 'Error ytmp32 : ' + err)
+			aksa.reply(from, mess.error.Yt3, id)
+		}
+		break
                 case `${prefix}smule`:
                     if (!isGroupMsg) return aksa.reply(dari, 'Perintah ini hanya bisa di gunakan dalam group!', id)
                     if (isLimit(serial)) return aksa.reply(dari, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik @limit Untuk Mengecek Kuota Limit Kamu`, id)
@@ -4621,7 +4615,7 @@ ${Object.keys(me.phone).map(key => `${key} : ${me.phone[key]}`).join('\n')}`.sli
                     }
                     break
                 case `${prefix}translate`:
-                    if (!isRegis) return aksa.reply(dari, `Maaf ${pushname}, sepertinya kamu belum terdaftar sebagai user Lucya, untuk pendaftaran bisa menggunakan *!regis* |nama|no hp. Contoh: !regis |${pushname}|${serial.replace(/@c.us/g,'')}`, id)
+                    if (!isRegis) return aksa.reply(from, `Maaf ${pushname}, sepertinya kamu belum terdaftar sebagai user Lucya, untuk pendaftaran bisa menggunakan *!regis* |nama|no hp. Contoh: !regis |${pushname}|${serial.replace(/@c.us/g,'')}`, id)
                     if (args[1] == undefined || args[2] == undefined) return
                     if (args.length >= 2) {
                         var codelang = args[1]
@@ -4629,9 +4623,9 @@ ${Object.keys(me.phone).map(key => `${key} : ${me.phone[key]}`).join('\n')}`.sli
                         translatte(texty, {
                             to: codelang
                         }).then(res => {
-                            aksa.sendText(dari, res.texty);
+						aksa.reply(from, `Nih hasilnya ${pushname}`, res.texty, id);
                         }).catch(err => {
-                            aksa.sendText(dari, `[ERROR] Teks tidak ada, atau kode bahasa ${codelang} tidak support\n~> *!bahasa* untuk melihat list kode bahasa`);
+                            aksa.reply(from, `[ERROR] Teks tidak ada, atau kode bahasa ${codelang} tidak support\n~> *!bahasa* untuk melihat list kode bahasa`);
                         });
                     }
                     break
@@ -4809,6 +4803,9 @@ Jangan lupa follow ya!🍻
 Instagram: https://instagram.com/bdrsmsdn 
 Twitter: https://twitter.com/bdrsmsdn`)
                     break
+				case `bot`:
+				aksa.sendPtt(from, './media/bot.mpeg', id)
+				    break
                 case `iri?`:
                 case `iri`:
                     aksa.sendPtt(dari, './media/iri.mp3', id)
