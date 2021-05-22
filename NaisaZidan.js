@@ -1114,8 +1114,8 @@ Total user terdaftar : ${regis.length}
                         if (lmt.id === serial) {
                             let limitCounts = limitCount - lmt.limit
                              var pic = await aksa.getProfilePicFromServer(author)
-            aksa.sendFileFromUrl(from, './media/bot.png', '' `
-							
+            aksa.sendFileFromUrl(from, pic, 'ZidanGanzz.jpg', `
+			
 ╭─────「 *INFO* 」──── 
 │++ _*LUCYA V2*_ 
 │+ 3.1.X 
@@ -4048,41 +4048,26 @@ ${Object.keys(me.phone).map(key => `${key} : ${me.phone[key]}`).join('\n')}`.sli
                     //media & downloader menu-----------------------------------------------------------------------------------------------------------------------------------
 
                 case `${prefix}ytmp4`:
-                    if (!isGroupMsg) return aksa.reply(from, `Perintah ini hanya bisa di gunakan dalam group!`, id)
-                    if (isLimit(serial)) return aksa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik @limit Untuk Mengecek Kuota Limit Kamu`, id)
-                    if (args.length === 1) return aksa.reply(from, `Kirim perintah *@ytmp4 [ Link Yt ]*, untuk contoh silahkan kirim perintah *@readme*`)
-                    if (isLimit(serial)) return aksa.reply(from, `Maaf ${pushname}, Kuota Limit Kamu Sudah Habis, Ketik ${prefix}limit Untuk Mengecek Kuota Limit Kamu`, id)
-            if (args.length === 1) return aksa.reply(from, `Kirim perintah *#ytmp4 [ Link Yt ]*, untuk contoh silahkan kirim perintah *#readme*`, id)
-                   // let isLinks = args[1].match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/)
-                    //if (!isLinks) return zfa.reply(from, mess.error.Iv, id)
                     try {
                         aksa.reply(from, mess.wait, id)
-                        const ytvh = await fetch(`https://api.vhtear.com/ytdl?link=${args[1]}&apikey=ZidanGanzz`)
-                        if (!ytvh.ok) throw new Error(`Error ytmp4 4 : ${vhtearyt3.statusText}`)
+                        const ytvh = await fetch(`https://lolhuman.herokuapp.com/api/ytvideo2?apikey=ZidanGanzz&url=${args[1]}`)
                         const ytvh2 = await ytvh.json()
-                        if (ytvh2.status == false) {
-                            aksa.reply(from, `*Maaf Terdapat kesalahan saat mengambil data, mohon pilih media lain...*`, id)
-                             } else {
-                            if (Number(ytvh2.result.size.split(' MB')[0]) >= 50.00) return aksa.reply(from, 'Maaf durasi audio sudah melebihi batas maksimal 10 MB!', id)							
-                            const {
+                           const {
                                 title,
-                                ext,
-                                size,
-                                UrlVideo,
-                                status,
-                                imgUrl
-                            } = await ytvh2.result
-                            const captions = `*「 YOUTUBE MP4 」*\n\n➸ *Judul* : ${title}\n➸ *Filesize* : ${size}\n\n_*Untuk durasi lebih dari batas disajikan dalam bentuk link*._\n${UrlVideo}`
-                            aksa.sendFileFromUrl(from, imgUrl, `thumb.jpg`, captions, id)
-                            await aksa.sendFileFromUrl(from, UrlVideo, `${title}.mp4`, `Jangan lupa donasi ya kak *${pushname}*. Jika berminat silahkan ketik *${prefix}donasi*`, id).catch(() => zfa.reply(from, mess.error.Yt4, id))
-                            await limitAdd(serial)
-                        }
+                                thumbnail,
+								size,
+								link
+                            } = await ytvh2.data.result
+                            const captions = `*「 YOUTUBE MP4 」*\n\n➸ *Judul* : ${title}\n➸ *Filesize* : ${size}\n\n_*Untuk durasi lebih dari batas disajikan dalam bentuk link*._\n${link}`
+                     aksa.sendFileFromUrl(from, thumbnail, `thumb.jpg`, captions, id)
+                            await aksa.sendFileFromUrl(from, link, `${title}.mp4`, `Jangan lupa donasi ya kak *${pushname}*. Jika berminat silahkan ketik *${prefix}donasi*`, id).catch(() => aksa.reply(from, mess.error.Yt4, id))
                     } catch (err) {
                         aksa.sendText(ownerNumber, 'Error ytmp4 : ' + err)
                         aksa.reply(from, mess.error.Yt4, id)
                     }
                     break
 			case `${prefix}ytmp32`:
+			try{
 		//if (!isOwner) aksa.reply(from, 'Masih di test oleh owner', id)
 		const naycans = body.slice(8)
 		const zfagans = await axios.get(`http://lolhuman.herokuapp.com/api/ytaudio2?apikey=ZidanGanzz&url=${naycans}`, id)
@@ -4095,8 +4080,7 @@ ${Object.keys(me.phone).map(key => `${key} : ${me.phone[key]}`).join('\n')}`.sli
 			const kepsenn = `「 YOUTUBE MP3 」\n\n➸ Judul : ${title}\n➸ Filesize : ${size}\n\n_Untuk durasi lebih dari batas disajikan dalam bentuk link._\n${link}`
 			aksa.sendFileFromUrl(from, thumbnail, `thumbnail.jpg`, kepsenn, id)
             await aksa.sendFileFromUrl(from, link[1].link, `${title}.mp3`, '', id).catch(() => aksa.reply(from, mess.error.Yt4, id))
-			await limitAdd(serial)
-		    }
+			await limitAdd(serial)  
 		} catch (err) {
 			aksa.sendText(ownerNumber, 'Error ytmp32 : ' + err)
 			aksa.reply(from, mess.error.Yt3, id)
