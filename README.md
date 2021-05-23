@@ -2,7 +2,7 @@
 
 ## Information
 
-- Change ownerNumber in msgHndlr.js to be your number
+- Change ownerNumber in NaisaZidan.js to be your number
 ownerNumber = "62812xxxxxx@c.us"
 - Change adminNumber in admin.json to be your number
 [] -> ["62812xxxxxx@c.us"]
@@ -19,7 +19,7 @@ If you find some bugs please contact the WhatsApp number on Contact
 
 ## APIKEY
 
-Open msgHndlr.js then edit & paste it in YOUR_APIKEY
+Open NaisaZidan.js then edit & paste it in YOUR_APIKEY
 - [VHTEAR](https://api.vhtear.com)
 - [MHANKBARBAR](https://mhankbarbar.herokuapp.com/api)
 
@@ -42,7 +42,7 @@ Jangan lupa follow instagramku yaa! https://instagram.com/bdrsmsdn
 Clone this project
 
 ```bash
-> git clone https://github.com/Angga23Bot/lucya-bot.git
+> git clone https://github.com/ZidanGanzz/Lucya-Bot
 > cd lucya-bot
 ```
 
